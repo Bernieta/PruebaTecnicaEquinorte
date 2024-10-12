@@ -1,0 +1,58 @@
+<main class="p-3">
+    <div class="mb-3 bg-white d-flex justify-content-between p-3">
+        <div class="d-flex gap-2 align-items-center">
+            <a routerLink="/" class="btn btn-secondary fw-bold">Regresar</a>
+            <h2 class="fs-4 fw-bold">Historial de Medidas</h2>
+        </div>
+        <button type="button" class="btn btn-primary fw-bold" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">Nueva Medida</button>
+    </div>
+    <div class="p-2 bg-white" *ngFor="let measurement of measurementsIndicator">
+        <article [ngClass]="{
+            'alert-danger': measurement.status === 'RED',
+            'alert-warning': measurement.status === 'YELLOW',
+            'alert-success': measurement.status === 'GREEN',
+            'alert-primary': measurement.status === 'BLUE'
+        }" class="alert" role="alert">
+            <div class="d-flex flex-column gap-2">
+                <h6 class="mb-2 fw-bold fs-4">{{ measurement.description }}</h6>
+                <p class="mb-0"><strong>Fecha: </strong>{{ measurement.measurementDate | date: 'mediumDate' }}</p>
+                <p class="mb-0"><strong>Valor Medida: </strong>{{ measurement.measurementValue }}</p>
+                <p class="mb-0"><strong>Estado: </strong>{{ measurement.status }}</p>
+            </div>
+        </article>
+    </div>
+</main>
+
+<div class="modal fade" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nueva Medida</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formMeasurement" (ngSubmit)="createMeasurement()">
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="description" formControlName="description" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="measurementDate" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="measurementDate"
+                            formControlName="measurementDate" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="measurementValue" class="form-label">Valor de Medida</label>
+                        <input type="number" class="form-control" id="measurementValue"
+                            formControlName="measurementValue" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-subtle me-2" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

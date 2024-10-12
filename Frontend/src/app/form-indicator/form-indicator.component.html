@@ -1,0 +1,26 @@
+<main class="p-3">
+    <div class="p-3 bg-white rounded-2">
+        <form [formGroup]="formIndicator" (ngSubmit)="edit?updateIndicator():createIndicator()">
+            <div class="mb-3">
+                <label for="indicatorName" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="indicatorName" formControlName="indicatorName" />
+            </div>
+            <div class="mb-3">
+                <label for="expectedValue" class="form-label">Valor Esperado</label>
+                <input type="number" class="form-control" id="expectedValue" formControlName="expectedValue" />
+            </div>
+            <div class="mb-3">
+                <label for="maxValue" class="form-label">Valor Máximo</label>
+                <input type="number" class="form-control" id="maxValue" formControlName="maxValue" />
+            </div>
+            <div class="mb-3">
+                <label for="minValue" class="form-label">Valor Minimo</label>
+                <input type="number" class="form-control" id="minValue" formControlName="minValue" />
+            </div>
+            <div class="modal-footer">
+                <a routerLink="/" class="btn btn-subtle me-2">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</main>
